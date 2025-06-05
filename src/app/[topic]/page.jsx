@@ -17,7 +17,8 @@ export default function QuizPage() {
 	const [selected, setSelected] = useState(null)
 	const [isSubmitted, setIsSubmitted] = useState(false)
 	const [score, setScore] = useState(0)
-	const [progress, setProgress] = useState([]) // هر سوال: true (درست) یا false (غلط)
+	const [progress, setProgress] = useState([])
+	const [showError, setShowError] = useState(false)
 
 	if (!quiz)
 		return <div className="text-center mt-20">Quiz not found</div>
@@ -26,7 +27,13 @@ export default function QuizPage() {
 	const isLastQuestion = current === quiz.questions.length - 1
 
 	const handleSubmit = () => {
+		if (!selected) {
+			setShowError(true)
+			return
+		}
 		setIsSubmitted(true)
+		setShowError(false)
+
 		const isCorrect = selected === question.answer
 		if (isCorrect) {
 			setScore(prev => prev + 1)
@@ -46,6 +53,11 @@ export default function QuizPage() {
 		router.push('/')
 	}
 
+	const handleSelect = option => {
+		setSelected(option)
+		setShowError(false)
+	}
+
 	return (
 		<main className="min-h-screen flex flex-col items-start px-4 py-10 xl:px-12">
 			<Header title={quiz.title} icon={quiz.icon} />
@@ -61,11 +73,12 @@ export default function QuizPage() {
 							question={question}
 							selected={selected}
 							isSubmitted={isSubmitted}
-							onSelect={setSelected}
+							onSelect={handleSelect}
 							totalQuestions={quiz.questions.length}
 							correctAnswersCount={score}
 							handleSubmit={handleSubmit}
 							handleNext={handleNext}
+							showError={showError}
 						/>
 					</>
 				) : (
@@ -76,7 +89,7 @@ export default function QuizPage() {
 						<div className="text-center">
 							<button
 								onClick={handleRestart}
-								className="mt-6 bg-indigo-600 text-white px-4 py-2 rounded-md w-full lg:w-1/2"
+								className="mt-6 bg-primary-100 text-white px-4 py-2 rounded-md w-full lg:w-1/2"
 							>
 								Play Again
 							</button>
