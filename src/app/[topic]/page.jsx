@@ -4,6 +4,7 @@ import data from '../data/data.json'
 import { useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Question from '../components/Question'
+import Header from '../components/Header'
 
 export default function QuizPage() {
 	const params = useParams()
@@ -46,17 +47,14 @@ export default function QuizPage() {
 	}
 
 	return (
-		<main className="min-h-screen flex flex-col items-center justify-center px-4 py-10 xl:px-40">
-			<div className="flex items-center space-x-2 mb-6">
-				<img src={quiz.icon} alt={quiz.title} className="w-10 h-10" />
-				<h2 className="text-2xl font-bold">{quiz.title}</h2>
-			</div>
-			{!(isLastQuestion && isSubmitted) && (
-				<p className="text-sm text-gray-600">
-					Question {current + 1} of {quiz.questions.length}
-				</p>
-			)}
-			<div className="w-full p-6 space-y-4">
+		<main className="min-h-screen flex flex-col items-start px-4 py-10 xl:px-12">
+			<Header title={quiz.title} icon={quiz.icon} />
+			<div className="w-full p-6 space-y-1">
+				{!(isLastQuestion && isSubmitted) && (
+					<p className="text-sm text-gray-600">
+						Question {current + 1} of {quiz.questions.length}
+					</p>
+				)}
 				{!isLastQuestion || !isSubmitted ? (
 					<>
 						<Question
@@ -66,25 +64,9 @@ export default function QuizPage() {
 							onSelect={setSelected}
 							totalQuestions={quiz.questions.length}
 							correctAnswersCount={score}
+							handleSubmit={handleSubmit}
+							handleNext={handleNext}
 						/>
-						<div className="flex justify-end mt-4">
-							{!isSubmitted ? (
-								<button
-									disabled={!selected}
-									onClick={handleSubmit}
-									className="bg-indigo-600 text-white px-4 py-2 rounded-md disabled:bg-indigo-300 w-full lg:w-1/2"
-								>
-									Submit
-								</button>
-							) : (
-								<button
-									onClick={handleNext}
-									className="bg-indigo-600 text-white px-4 py-2 rounded-md"
-								>
-									Next Question
-								</button>
-							)}
-						</div>
 					</>
 				) : (
 					<>
@@ -94,7 +76,7 @@ export default function QuizPage() {
 						<div className="text-center">
 							<button
 								onClick={handleRestart}
-								className="mt-6 bg-green-600 text-white px-6 py-2 rounded-lg"
+								className="mt-6 bg-indigo-600 text-white px-4 py-2 rounded-md w-full lg:w-1/2"
 							>
 								Play Again
 							</button>

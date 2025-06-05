@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { CheckCircle, XCircle } from 'lucide-react'
 import ProgressBar from './ProgressBar' // مسیر رو اگر متفاوت هست، تنظیم کن
 
 export default function Question({
@@ -8,12 +9,14 @@ export default function Question({
 	onSelect,
 	totalQuestions,
 	correctAnswersCount,
+	handleNext,
+	handleSubmit,
 }) {
 	return (
-		<div className="space-y-4 lg:flex lg:items-center justify-center lg:gap-x-20">
-			<div className="lg:w-1/2">
+		<div className="space-y-4 lg:flex lg:items-center justify-start lg:gap-x-20">
+			<div className="lg:w-2/5 xl:w-1/2">
 				{/* سوال */}
-				<p className="text-lg md:text-4xl font-medium mb-12 lg:mb-36">
+				<p className="text-lg md:text-4xl font-medium mb-12 lg:mb-20">
 					{question.question}
 				</p>
 
@@ -24,11 +27,13 @@ export default function Question({
 				/>
 			</div>
 			{/* گزینه‌های پاسخ */}
-			<div className="lg:w-1/2 flex flex-col gap-y-4">
+			<div className="lg:w-3/5 xl:w-1/2 flex flex-col gap-y-4">
 				{question.options.map((option, index) => {
 					const isCorrect = option === question.answer
-					const isWrong = selected === option && !isCorrect
 					const isSelected = selected === option
+					const isWrong = isSubmitted && isSelected && !isCorrect
+					const showCheckIcon = isSubmitted && isCorrect
+					const showXIcon = isSubmitted && isWrong
 
 					return (
 						<button
@@ -36,38 +41,66 @@ export default function Question({
 							disabled={isSubmitted}
 							onClick={() => onSelect(option)}
 							className={clsx(
-								'flex items-center w-full text-left border rounded-lg p-4 transition text-lg md:text-2xl gap-x-4 bg-white',
+								'flex items-center justify-between w-full text-left border rounded-lg px-4 py-2 transition font-medium',
 								{
-									'border-gray-300':
-										!isSubmitted || selected !== option,
-									'bg-green-100 border-green-500':
-										isSubmitted && isCorrect,
-									'bg-red-100 border-red-500': isSubmitted && isWrong,
-									'ring-2 ring-indigo-500':
-										selected === option && !isSubmitted,
+									// حالت‌های بدون ارسال
+									'border-gray-300': !isSubmitted && !isSelected,
+									'ring-2 ring-purple-500 border-purple-300':
+										isSelected && !isSubmitted,
+
+									// پاسخ صحیح
+									' border-green-500': isSubmitted && isCorrect,
+
+									// پاسخ غلط
+									' border-red-500': isSubmitted && isWrong,
 								},
 							)}
 						>
-							<span
-								className={clsx(
-									'w-14 h-14 mr-3 flex items-center justify-center text-lg lg:text-[1.75rem] font-medium rounded-md',
-									{
-										'bg-gray-300 text-black':
-											!isSubmitted && !isSelected,
-										'bg-purple-600 text-white':
-											isSelected && !isSubmitted,
-										'bg-green-600 text-white':
-											isSubmitted && isCorrect,
-										'bg-red-600 text-white': isSubmitted && isWrong,
-									},
-								)}
-							>
-								{String.fromCharCode(65 + index)}
-							</span>
-							{option}
+							<div className="flex items-center space-x-2">
+								<span
+									className={clsx(
+										'w-6 h-6 flex items-center justify-center rounded text-white text-sm font-bold',
+										{
+											'bg-gray-400': !isSubmitted && !isSelected,
+											'bg-purple-500': isSelected && !isSubmitted,
+											'bg-green-500': isSubmitted && isCorrect,
+											'bg-red-500': isSubmitted && isWrong,
+										},
+									)}
+								>
+									{String.fromCharCode(65 + index)}
+								</span>
+								<span>{option}</span>
+							</div>
+
+							{/* آیکون‌ها */}
+							{showCheckIcon && (
+								<CheckCircle className="w-5 h-5 text-green-500" />
+							)}
+							{showXIcon && (
+								<XCircle className="w-5 h-5 text-red-500" />
+							)}
 						</button>
 					)
 				})}
+				<div className="flex justify-end mt-4">
+					{!isSubmitted ? (
+						<button
+							disabled={!selected}
+							onClick={handleSubmit}
+							className="mt-6 bg-indigo-600 text-white px-4 py-2 rounded-md disabled:bg-indigo-300 w-full"
+						>
+							Submit
+						</button>
+					) : (
+						<button
+							onClick={handleNext}
+							className="mt-6 bg-indigo-600 text-white px-4 py-2 rounded-md w-full"
+						>
+							Next Question
+						</button>
+					)}
+				</div>
 			</div>
 		</div>
 	)
