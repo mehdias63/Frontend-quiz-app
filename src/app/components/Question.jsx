@@ -16,18 +16,14 @@ export default function Question({
 	return (
 		<div className="space-y-4 lg:flex lg:items-center justify-start lg:gap-x-20">
 			<div className="lg:w-2/5 xl:w-1/2">
-				{/* سوال */}
 				<p className="text-lg md:text-4xl font-medium mb-12 lg:mb-20">
 					{question.question}
 				</p>
-
-				{/* نوار پیشرفت */}
 				<ProgressBar
 					total={totalQuestions}
 					correct={correctAnswersCount}
 				/>
 			</div>
-			{/* گزینه‌های پاسخ */}
 			<div className="lg:w-3/5 xl:w-1/2 flex flex-col gap-y-4">
 				{question.options.map((option, index) => {
 					const isCorrect = option === question.answer
@@ -42,17 +38,12 @@ export default function Question({
 							disabled={isSubmitted}
 							onClick={() => onSelect(option)}
 							className={clsx(
-								'group flex items-center justify-between w-full text-left border rounded-lg px-4 py-2 transition font-medium bg-white',
+								'group flex items-center justify-between w-full text-left border rounded-3xl p-3 lg:p-4 transition font-medium bg-white',
 								{
-									// حالت‌های بدون ارسال
 									'border-gray-300': !isSubmitted && !isSelected,
 									'ring-2 ring-purple-500 border-purple-300':
 										isSelected && !isSubmitted,
-
-									// پاسخ صحیح
 									' border-green-500': isSubmitted && isCorrect,
-
-									// پاسخ غلط
 									' border-red-500': isSubmitted && isWrong,
 								},
 							)}
@@ -77,7 +68,6 @@ export default function Question({
 								<span className="text-primary-900">{option}</span>
 							</div>
 
-							{/* آیکون‌ها */}
 							{showCheckIcon && (
 								<CheckCircle className="w-5 h-5 text-success" />
 							)}
@@ -92,7 +82,7 @@ export default function Question({
 						<>
 							<button
 								onClick={handleSubmit}
-								className="mt-6 bg-primary-100 text-white p-4 rounded-md disabled:bg-primary-100/40 w-full text-lg md:text-[1.75rem] font-medium
+								className="mt-6 bg-primary-100 text-white p-8 rounded-3xl w-full text-lg md:text-[1.75rem] font-medium
 								leading-[1.125rem] md:leading-[1.75rem]"
 							>
 								Submit Answer
@@ -109,7 +99,7 @@ export default function Question({
 					) : (
 						<button
 							onClick={handleNext}
-							className="mt-6 bg-primary-100 text-white p-4 rounded-md w-full"
+							className="mt-6 bg-primary-100 text-white p-8 rounded-3xl w-full text-lg md:text-[1.75rem] font-medium leading-[1.125rem] md:leading-[1.75rem]"
 						>
 							Next Question
 						</button>
