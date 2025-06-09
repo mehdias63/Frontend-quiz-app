@@ -8,7 +8,8 @@
 		&.light-mode {
 			--background-app-rgb: 249, 250, 251;
 			--color-primary-900: 49, 62, 51;
-			--color-primary-800: 98, 108, 127;
+			--color-primary-800: 244, 246, 250;
+			--color-primary-700: 98, 108, 127;
 			--color-primary-200: 246, 231, 255;
 			--color-primary-100: 167, 41, 245;
 			--color-success: 38, 215, 130;
@@ -20,26 +21,6 @@
 			--color-primary-800: 171, 193, 225;
 		}
 	}
-}
-
-.rti--container {
-	background-color: rgb(var(--color-secondary-100));
-	--rti-radius: 0.375rem;
-	--rti-s: 0.5rem;
-	--rti-tag: #edf2f7;
-	--rti-tag-remove: #e53e3e;
-	border: none;
-}
-.rti--container .rti--input {
-	background-color: rgb(var(--color-secondary-200));
-	color: rgb(var(--color-secondary-800));
-	padding: 0.3rem 1rem;
-	border-radius: 0.5rem;
-}
-
-.rti--tag {
-	background-color: rgb(var(--color-secondary-500));
-	color: rgb(var(--color-secondary-100));
 }
 
 @layer components {
@@ -73,7 +54,6 @@
 * {
 	box-sizing: border-box;
 	scroll-behavior: smooth;
-	/* border: none; */
 	outline: none;
 	padding: 0;
 	margin: 0;
