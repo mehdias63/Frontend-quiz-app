@@ -42,7 +42,7 @@ export default function Question({
 							disabled={isSubmitted}
 							onClick={() => onSelect(option)}
 							className={clsx(
-								'group flex items-center justify-between w-full text-left border rounded-lg px-4 py-2 transition font-medium',
+								'group flex items-center justify-between w-full text-left border rounded-lg px-4 py-2 transition font-medium bg-white',
 								{
 									// حالت‌های بدون ارسال
 									'border-gray-300': !isSubmitted && !isSelected,
@@ -57,22 +57,24 @@ export default function Question({
 								},
 							)}
 						>
-							<div className="flex items-center space-x-2">
+							<div className="flex items-center space-x-2 lg:space-x-5 text-lg xl:text-[1.75rem]">
 								<span
 									className={clsx(
-										'w-6 h-6 flex items-center justify-center rounded text-white text-sm font-bold',
+										' flex items-center justify-center rounded text-primary-800 p-2 font-bold',
 										{
-											'bg-gray-400 group-hover:bg-primary-200 group-hover:text-primary-100':
+											'bg-primary-700 group-hover:bg-primary-200 group-hover:text-primary-100':
 												!isSubmitted && !isSelected,
-											'bg-primary-100': isSelected && !isSubmitted,
-											'bg-success': isSubmitted && isCorrect,
-											'bg-error': isSubmitted && isWrong,
+											'bg-primary-100 text-white':
+												isSelected && !isSubmitted,
+											'bg-success text-white':
+												isSubmitted && isCorrect,
+											'bg-error text-white': isSubmitted && isWrong,
 										},
 									)}
 								>
 									{String.fromCharCode(65 + index)}
 								</span>
-								<span>{option}</span>
+								<span className="text-primary-900">{option}</span>
 							</div>
 
 							{/* آیکون‌ها */}

@@ -59,11 +59,11 @@ export default function QuizPage() {
 	}
 
 	return (
-		<main className="min-h-screen flex flex-col items-start px-4 py-10 xl:px-12">
+		<main className="relative min-h-screen flex flex-col items-start px-4 py-10 xl:px-12 z-20">
 			<Header title={quiz.title} icon={quiz.icon} />
 			<div className="w-full p-6 space-y-1">
 				{!(isLastQuestion && isSubmitted) && (
-					<p className="text-sm text-gray-600">
+					<p className="text-sm lg:text-lg leading-[1.3125rem] text-primary-800">
 						Question {current + 1} of {quiz.questions.length}
 					</p>
 				)}

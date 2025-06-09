@@ -10,6 +10,23 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
 			<body className={`${rubikFont.variable} min-h-screen`}>
+				<div className="absolute inset-0">
+					<picture>
+						<source
+							media="(min-width: 1024px)"
+							srcSet="/images/pattern-background-desktop-light.svg"
+						/>
+						<source
+							media="(min-width: 640px)"
+							srcSet="/images/pattern-background-tablet-light.svg"
+						/>
+						<img
+							src="/images/pattern-background-mobile-light.svg"
+							alt="background pattern"
+							className="w-full h-full object-cover"
+						/>
+					</picture>
+				</div>
 				{children}
 			</body>
 		</html>

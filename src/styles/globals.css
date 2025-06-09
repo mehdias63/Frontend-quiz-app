@@ -8,8 +8,8 @@
 		&.light-mode {
 			--background-app-rgb: 249, 250, 251;
 			--color-primary-900: 49, 62, 51;
-			--color-primary-800: 244, 246, 250;
-			--color-primary-700: 98, 108, 127;
+			--color-primary-800: 98, 108, 127;
+			--color-primary-700: 244, 246, 250;
 			--color-primary-200: 246, 231, 255;
 			--color-primary-100: 167, 41, 245;
 			--color-success: 38, 215, 130;
