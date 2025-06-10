@@ -6,6 +6,7 @@ import { useParams, useRouter } from 'next/navigation'
 import Question from '../components/Question'
 import Header from '../components/Header'
 import clsx from 'clsx'
+import QuizIcon from 'app/components/QuizIcon'
 
 export default function QuizPage() {
 	const params = useParams()
@@ -59,11 +60,11 @@ export default function QuizPage() {
 		setShowError(false)
 	}
 
-	const bgColor = clsx('rounded-full p-2', {
-		'bg-orange-200': quiz.title.toLowerCase() === 'html',
-		'bg-blue-200': quiz.title.toLowerCase() === 'css',
-		'bg-yellow-200': quiz.title.toLowerCase() === 'javascript',
-		'bg-purple-200': quiz.title.toLowerCase() === 'accessibility',
+	const bgColor = clsx('rounded-xl p-2', {
+		'bg-primary-600': quiz.title.toLowerCase() === 'html',
+		'bg-primary-500': quiz.title.toLowerCase() === 'css',
+		'bg-primary-400': quiz.title.toLowerCase() === 'javascript',
+		'bg-primary-200': quiz.title.toLowerCase() === 'accessibility',
 	})
 
 	return (
@@ -97,16 +98,11 @@ export default function QuizPage() {
 						</div>
 						<div className="w-full">
 							<div className="bg-white w-full p-4 flex flex-col items-center">
-								<div className="flex items-center space-x-2 mb-6">
-									<div className={bgColor}>
-										<img
-											src={quiz.icon}
-											alt={quiz.title}
-											className="w-10 h-10"
-										/>
-									</div>
-									<h2 className="text-2xl font-bold">{quiz.title}</h2>
-								</div>
+								<QuizIcon
+									title={quiz.title}
+									icon={quiz.icon}
+									bgColor={bgColor}
+								/>
 								<p className="text-[5rem]">{score}</p>
 								<span> out of {quiz.questions.length}</span>
 							</div>

@@ -19,7 +19,6 @@ export default function Home() {
 						key={quiz.title}
 						title={quiz.title}
 						icon={quiz.icon}
-						color={quiz.color}
 					/>
 				))}
 			</div>

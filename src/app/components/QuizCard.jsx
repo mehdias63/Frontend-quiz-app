@@ -1,17 +1,11 @@
 import Link from 'next/link'
+import QuizIcon from './QuizIcon'
 
-export default function QuizCard({ title, icon, color }) {
+export default function QuizCard({ title, icon, bgColor }) {
 	return (
 		<Link href={`/${title.toLowerCase()}`}>
 			<div className="bg-white shadow-md hover:shadow-lg transition p-4 rounded-xl cursor-pointer flex items-center gap-4 w-full min-w-[20rem] xl:min-w-[35rem] mb-6 text-primary-900">
-				<div className={color}>
-					<img
-						src={icon.replace('./', '/')}
-						alt={title}
-						className="w-6 h-6"
-					/>
-				</div>
-				<span className="text-lg font-semibold">{title}</span>
+				<QuizIcon title={title} icon={icon} bgColor={bgColor} />
 			</div>
 		</Link>
 	)
