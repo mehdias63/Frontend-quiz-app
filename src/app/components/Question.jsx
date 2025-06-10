@@ -8,7 +8,7 @@ export default function Question({
 	isSubmitted,
 	onSelect,
 	totalQuestions,
-	correctAnswersCount,
+	answered,
 	handleNext,
 	handleSubmit,
 	showError,
@@ -19,10 +19,7 @@ export default function Question({
 				<p className="text-lg md:text-4xl font-medium mb-12 lg:mb-20">
 					{question.question}
 				</p>
-				<ProgressBar
-					total={totalQuestions}
-					correct={correctAnswersCount}
-				/>
+				<ProgressBar total={totalQuestions} answered={answered} />
 			</div>
 			<div className="lg:w-3/5 xl:w-1/2 flex flex-col gap-y-4">
 				{question.options.map((option, index) => {
@@ -82,7 +79,7 @@ export default function Question({
 						<>
 							<button
 								onClick={handleSubmit}
-								className="mt-6 bg-primary-100 text-white p-8 rounded-3xl w-full text-lg md:text-[1.75rem] font-medium
+								className="mt-6 bg-primary-100 text-white p-6 md:p-8 rounded-3xl w-full text-lg md:text-[1.75rem] font-medium
 								leading-[1.125rem] md:leading-[1.75rem]"
 							>
 								Submit Answer
@@ -99,7 +96,8 @@ export default function Question({
 					) : (
 						<button
 							onClick={handleNext}
-							className="mt-6 bg-primary-100 text-white p-8 rounded-3xl w-full text-lg md:text-[1.75rem] font-medium leading-[1.125rem] md:leading-[1.75rem]"
+							className="mt-6 bg-primary-100 text-white p-6 md:p-8 rounded-3xl w-full text-lg md:text-[1.75rem] font-medium leading-[1.125rem]
+							 md:leading-[1.75rem]"
 						>
 							Next Question
 						</button>

@@ -84,32 +84,38 @@ export default function QuizPage() {
 							isSubmitted={isSubmitted}
 							onSelect={handleSelect}
 							totalQuestions={quiz.questions.length}
-							correctAnswersCount={score}
+							answered={progress.length}
 							handleSubmit={handleSubmit}
 							handleNext={handleNext}
 							showError={showError}
 						/>
 					</>
 				) : (
-					<div className="w-full flex items-center">
-						<div className="w-full">
-							<h2>Quiz completed</h2>
-							<p>You scored...</p>
+					<div className="w-full flex flex-col lg:flex-row items-start lg:px-12">
+						<div className="w-full text-primary-900 text-[2.5rem] lg:text-[4rem]">
+							<p className="font-light">Quiz completed</p>
+							<p className="font-semibold">You scored...</p>
 						</div>
-						<div className="w-full">
-							<div className="bg-white w-full p-4 flex flex-col items-center">
+						<div className="w-full flex flex-col items-center">
+							<div className="bg-white w-full p-4 flex flex-col items-center max-w-[35.5rem] rounded-3xl mt-16 lg:mt-0">
 								<QuizIcon
 									title={quiz.title}
 									icon={quiz.icon}
 									bgColor={bgColor}
 								/>
-								<p className="text-[5rem]">{score}</p>
-								<span> out of {quiz.questions.length}</span>
+								<p className="text-[5.5rem] lg:text-[9rem] font-medium text-primary-900">
+									{score}
+								</p>
+								<span className="text-lg lg:text-2xl text-primary-800 mb-6">
+									{' '}
+									out of {quiz.questions.length}
+								</span>
 							</div>
 							<div className="text-center w-full">
 								<button
 									onClick={handleRestart}
-									className="mt-6 bg-primary-100 text-white px-4 py-2 rounded-md w-full lg:w-1/2"
+									className="mt-6 bg-primary-100 text-white p-4 md:p-8 rounded-3xl text-lg md:text-[1.75rem] font-medium leading-[1.125rem] w-full 
+									md:leading-[1.75rem] max-w-[35.5rem]"
 								>
 									Play Again
 								</button>

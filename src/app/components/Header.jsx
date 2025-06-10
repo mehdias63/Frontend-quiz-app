@@ -4,7 +4,7 @@ import QuizIcon from './QuizIcon'
 
 function Header({ title, icon, bgColor }) {
 	return (
-		<div>
+		<div className="lg:px-12">
 			<QuizIcon title={title} icon={icon} bgColor={bgColor} />
 			{/* <Button variant="outline">Button</Button> */}
 		</div>
