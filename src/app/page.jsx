@@ -1,5 +1,6 @@
 import data from './data/data.json'
 import QuizCard from './components/QuizCard'
+import { GetBgColor } from './lib/Utils'
 
 export default function Home() {
 	return (
@@ -19,6 +20,7 @@ export default function Home() {
 						key={quiz.title}
 						title={quiz.title}
 						icon={quiz.icon}
+						bgColor={GetBgColor(quiz.title)}
 					/>
 				))}
 			</div>
