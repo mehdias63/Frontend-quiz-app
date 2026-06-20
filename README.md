@@ -112,16 +112,6 @@ npm run dev
 http://localhost:3000
 ```
 
-## 🌟 Future Improvements
-
-- Timer for each question
-- Progress indicator
-- Multiple quiz categories
-- Difficulty levels
-- Review answers after submission
-- Store quiz history using Local Storage
-- Dark/Light mode support
-
 ## 🌐 Live Demo
 
 [View Demo](https://frontend-quiz-app-seven-pearl.vercel.app/)
